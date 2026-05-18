@@ -1,7 +1,12 @@
-target/
+### Backend (Maven) ###
+backend/target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+
+### Frontend (Node) ###
+frontend/node_modules/
+frontend/dist/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -39,3 +44,5 @@ build/
 
 ### Environment ###
 .env
+frontend/.env
+backend/.env

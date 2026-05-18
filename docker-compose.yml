@@ -20,9 +20,9 @@ services:
     networks:
       - asistencia-network
 
-  app:
-    build: .
-    container_name: asistencia-app
+  backend:
+    build: ./backend
+    container_name: asistencia-backend
     environment:
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
@@ -32,6 +32,16 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    networks:
+      - asistencia-network
+
+  frontend:
+    build: ./frontend
+    container_name: asistencia-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
     networks:
       - asistencia-network
 

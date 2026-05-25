@@ -21,3 +21,13 @@ export const logout = (): void => {
 export const isAuthenticated = (): boolean => {
   return !!localStorage.getItem('authCredentials');
 };
+
+export const getUsername = (): string => {
+  const credentials = localStorage.getItem('authCredentials');
+  if (!credentials) return '';
+  try {
+    return atob(credentials).split(':')[0];
+  } catch {
+    return '';
+  }
+};

@@ -1,8 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { isAuthenticated } from './services/auth';
 import Navbar from './components/Navbar';
+import Toast from './components/Toast';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
+import DashboardPage from './pages/DashboardPage';
 import NuevaAsistenciaPage from './pages/NuevaAsistenciaPage';
 import VerAsistenciaPage from './pages/VerAsistenciaPage';
 import EditarAsistenciaPage from './pages/EditarAsistenciaPage';
@@ -13,9 +15,10 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
 function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
-      {children}
+      <main>{children}</main>
+      <Toast />
     </div>
   );
 }
@@ -31,6 +34,16 @@ export default function App() {
             <ProtectedRoute>
               <AppLayout>
                 <HomePage />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <AppLayout>
+                <DashboardPage />
               </AppLayout>
             </ProtectedRoute>
           }
@@ -65,6 +78,7 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   );
